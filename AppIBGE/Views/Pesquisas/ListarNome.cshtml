@@ -1,0 +1,47 @@
+﻿@model IEnumerable<AppIBGE.Models.NomesIBGE>
+
+@{
+    ViewBag.Title = "ListarNome";
+}
+
+<h2>ListarNome</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.localidade)
+        </th>
+        <th>
+               &nbsp;
+        </th>
+
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.nome)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.localidade)
+    </td>
+    <td>
+        @foreach (var item2 in item.res)
+        {
+        <div>
+            @Html.DisplayFor(chieldItem => item2.periodo)
+        </div>
+        <div>
+            @Html.DisplayFor(chieldItem => item2.frequencia)
+        </div>    
+        }
+    </td>
+
+</tr>
+}
+
+</table>
