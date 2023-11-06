@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "PesquisaNome";
+}
+
+<h2>PesquisaNome</h2>
+
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.Label("Digite o Nome: ")
+        @Html.TextBox("Nome")<br />
+        <input type="submit" value="Pesquisar" />
+    }
+</div>

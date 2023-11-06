@@ -39,7 +39,7 @@ namespace AppIBGE.Controllers
         [HttpGet]
         public async Task<ActionResult> ListarNome()
         {
-            string API = "censos/nomes/enzo";
+            string API = "censos/nomes/" + Session["Nome"].ToString();
 
             var response = await client.GetAsync(API);
 
@@ -50,6 +50,12 @@ namespace AppIBGE.Controllers
                 // List<Pedidos>  <=====  JSon
                 var Lista = JsonConvert.DeserializeObject<NomesIBGE[]>(resultado).ToList();
 
+                foreach (var item in Lista[0].res)
+                {
+                    item.periodo = 
+                        item.periodo.ToString().Replace("[", "");
+                }
+
                 return View(Lista);
             }
             else
@@ -57,12 +63,21 @@ namespace AppIBGE.Controllers
         }
 
 
-
-        // GET: Pesquisas
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult PesquisaNome()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult PesquisaNome(FormCollection Dados)
+        {
+            Session["Nome"] = Dados["Nome"];
+
+            return RedirectToAction("ListarNome");
         }
     }
     
 }
+
+
